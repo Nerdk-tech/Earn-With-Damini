@@ -634,3 +634,10 @@ ul { list-style: none; }
 
 /* disabled checkout when cart empty */
 #checkoutBtn.disabled { opacity: 0.45; pointer-events: none; }
+
+/* pay-in-full button label */
+.plan strong.full-label {
+  font-size: 1.55rem; line-height: 1.7;
+  padding-top: 0.35rem;
+  letter-spacing: 0.04em;
+}

@@ -77,7 +77,7 @@
           </div>
           <div class="hero-stats reveal">
             <div><strong>Mentor-Led</strong><span>direct access to Damini</span></div>
-            <div><strong>Flexible Pay</strong><span>2 · 5 · 10 installments</span></div>
+            <div><strong>Flexible Pay</strong><span>full · 2 · 5 · 10 installments</span></div>
             <div><strong>Lifetime Access</strong><span>once you're in, you're in</span></div>
           </div>
         </div>
@@ -195,6 +195,9 @@
       <p class="section-sub reveal">Don't let one big payment stop your bag. Choose how many times you want to split your total — then seal it on WhatsApp.</p>
 
       <div class="plan-picker reveal" role="radiogroup" aria-label="Choose your payment plan">
+        <button class="plan" data-plan="Full payment" role="radio" aria-checked="false">
+          <strong class="full-label">FULL</strong><span>payment</span><em>Pay everything at once</em>
+        </button>
         <button class="plan" data-plan="2 payments" role="radio" aria-checked="false">
           <strong>2</strong><span>payments</span><em>Bigger chunks, done faster</em>
         </button>
@@ -232,7 +235,7 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <p class="footer-logo">Earn With Daminī</p>
-    <p class="footer-note">Affiliate marketing training with flexible installments — 2, 5 or 10 payments.</p>
+    <p class="footer-note">Affiliate marketing training — pay in full or in 2, 5 or 10 installments.</p>
     <p class="footer-copy">© <span id="year">2026</span> Earn With Daminī · Built sharp by Damini</p>
   </footer>
 
@@ -250,7 +253,7 @@
     <div class="cart-foot">
       <div class="cart-total"><span>Total</span><strong id="cartTotal">₦0</strong></div>
       <a class="btn btn-solid" id="checkoutBtn" href="#">Checkout on WhatsApp →</a>
-      <p class="cart-note">With <strong id="cartPlanLabel">5 payments</strong>: <strong id="cartPerPay">—</strong> per payment</p>
+      <p class="cart-note">With <strong id="cartPlanLabel">5 payments</strong>: <strong id="cartPerPay">—</strong> <span id="cartPerSuffix">per payment</span></p>
     </div>
   </aside>
   <div class="cart-overlay" id="cartOverlay" hidden></div>

@@ -130,8 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function planCount() {
-    return Number(selectedPlan().split(" ")[0]);
+    const first = selectedPlan().split(" ")[0];
+    const n = Number(first);
+    return isNaN(n) ? 1 : n; // "Full" counts as one payment
   }
+
+  const isFull = () => selectedPlan().startsWith("Full");
 
   function buildCheckoutMessage() {
     const plan = selectedPlan();
@@ -144,10 +148,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = courseCard(name);
         return `• ${name} — ${naira(Number(card.dataset.price))}`;
       }).join("\n");
-      return `Hi Damini! 👋 I want to enroll in these courses from *Earn With Daminī*:\n${lines}\n\nTotal: *${naira(total)}*\nI'd like to pay in *${plan}* (about ${naira(per)} per payment).\nPlease send me the payment details.`;
+      const payLine = isFull()
+        ? `I'd like to pay in *full* — ${naira(total)}.`
+        : `I'd like to pay in *${plan}* (about ${naira(per)} per payment).`;
+      return `Hi Damini! 👋 I want to enroll in these courses from *Earn With Daminī*:\n${lines}\n\nTotal: *${naira(total)}*\n${payLine}\nPlease send me the payment details.`;
     }
 
-    return `Hi Damini! 👋 I want to enroll in a course with *Earn With Daminī*. I'd like to pay in *${plan}*. Please send me the details and how to start.`;
+    const emptyLine = isFull()
+      ? `I'd like to pay in full.`
+      : `I'd like to pay in *${plan}*.`;
+    return `Hi Damini! 👋 I want to enroll in a course with *Earn With Daminī*. ${emptyLine} Please send me the details and how to start.`;
   }
 
   function refreshAll() {
@@ -160,7 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
     waPayBtn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildCheckoutMessage())}`;
 
     if (total > 0) {
-      planBreakdown.textContent = ` → ${naira(per)} per payment`;
+      planBreakdown.textContent = isFull()
+        ? ` → ${naira(total)} paid once, in full`
+        : ` → ${naira(per)} per payment`;
       planBreakdown.hidden = false;
     } else {
       planBreakdown.hidden = true;
@@ -168,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cartPlanLabel.textContent = plan;
     cartPerPay.textContent = total > 0 ? naira(per) : "—";
+    document.getElementById("cartPerSuffix").textContent = isFull() ? "in full" : "per payment";
 
     if (total > 0) {
       checkoutBtn.href = waPayBtn.href;
